@@ -1,0 +1,12 @@
+[user]
+	name = Galaad
+	e-mail = galaadiverres@gmail.com
+	email = galaadiverres@gmail.com
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[core]
+	editor = vim
+[merge]
+	tool = vimdiff
