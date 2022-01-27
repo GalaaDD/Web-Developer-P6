@@ -14,7 +14,7 @@ mongoose.connect('mongodb+srv://GD:798826Ang@cluster0.vy4cg.mongodb.net/test?ret
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !')); 
 
-//Middleware pour modifier les authorisations provenant de deux ports différents
+//Middleware pour modifier les authorisations provenant de deux ports différents,(CORS)
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
@@ -44,6 +44,18 @@ app.get('/api/sauces/:id', (req, res, next) => {
 Thing.findOne({ _id: req.params.id })
     .then(thing => res.status(200).json(thing))
     .catch(error => res.status(404).json({ error }));
+});
+//route PUT, utilisation de la méthode .updateOne pour mettre à jour l'objet, suivi de l'objet a modifier ainsi que l'objet modifié, qui correspond à l'id généré par mangoose
+app.put('/api/sauces/:id', (req, res, next) => {
+  Thing.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
+    .then(() => res.status(200).json({ message: 'Objet modifié !'}))
+    .catch(error => res.status(400).json({ error }));
+});
+// middleware delete pour supprimer un objet avec l'utilisation deleteOne, un seul argument car c'est une suppression
+app.delete('/api/stuff/:id', (req, res, next) => {
+  Thing.deleteOne({ _id: req.params.id })
+    .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
+    .catch(error => res.status(400).json({ error }));
 });
 
 // Middleware servant à récuprer les informations de chaque sauce
