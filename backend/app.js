@@ -8,12 +8,12 @@ const mongoose = require('mongoose');
 const saucesRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
 
-mongoose.connect('mongodb+srv://GD:798826Ang@cluster0.vy4cg.mongodb.net/test?retryWrites=true&w=majority',
+/*mongoose.connect('mongodb+srv://@cluster0.vy4cg.mongodb.net/test?retryWrites=true&w=majority',
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !')); 
-
+*/
 
 app.use(express.json());
 
