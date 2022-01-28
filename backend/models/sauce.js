@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 
 // Schema de données, utilisation de la méthode schema mise à diposition par mangoose, l'id est automatiquement généré par mangoose
-const thingSchema = mongoose.Schema({
+const sauceSchema = mongoose.Schema({
     _id: { type: String, required: true },
     name: { type: String, required: true },
     manufacturer: { type: String, required: true },
@@ -18,4 +18,4 @@ const thingSchema = mongoose.Schema({
 });
 
 // exportation du schema en tant que modèle mangoose, le rendant disponible à l'utilisation par express
-module.exports = mongoose.model('Thing', thingSchema);
+module.exports = mongoose.model('Sauce', sauceSchema);
