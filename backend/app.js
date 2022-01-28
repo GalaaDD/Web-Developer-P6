@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const saucesRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
 
-/*mongoose.connect('mongodb+srv://@cluster0.vy4cg.mongodb.net/test?retryWrites=true&w=majority',
+/*mongoose.connect('
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
