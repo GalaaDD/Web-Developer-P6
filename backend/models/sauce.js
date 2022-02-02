@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 // Schema de données, utilisation de la méthode schema mise à diposition par mangoose, l'id est automatiquement généré par mangoose
 const sauceSchema = mongoose.Schema({
+    userId: { type: String, required: true },
     name: { type: String, required: true },
     manufacturer: { type: String, required: true },
     description: { type: String, required: true },

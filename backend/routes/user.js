@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 //controler pour associer les fonctions aux différentes routes
-const userCtrl = require('../controllers/user');
+const userCtrl = require('../controllers/User');
 
 //utilisation de la route signup
 router.post('/signup', userCtrl.signup);

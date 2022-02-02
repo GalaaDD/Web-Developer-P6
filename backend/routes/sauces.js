@@ -17,6 +17,7 @@ router.get('/:id', auth, saucesCtrl.getOneSauce);
 router.put('/:id', auth, saucesCtrl.modifySauce);
 // middleware delete pour supprimer un objet avec l'utilisation deleteOne, un seul argument car c'est une suppression
 router.delete('/:id', auth, saucesCtrl.deleteSauce);
-
+// middleware pour recuperer les likes ou dislike d'un id
+router.post('/:id/like', auth, saucesCtrl.likeDislikeSauce);
 
 module.exports = router;

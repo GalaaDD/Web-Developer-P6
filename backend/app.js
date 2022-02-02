@@ -8,8 +8,9 @@ const path = require('path');
 
 
 //importation du fichier sauces.js permettant d'appeler le router
-const saucesRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
+const saucesRoutes = require('./routes/sauces');
+
 
 mongoose.connect(process.env.SECRET_DB,
   { useNewUrlParser: true,
