@@ -4,8 +4,8 @@ const app = express();
 //Constante pour appeler et pouvoir utiliser Mangoose
 const mongoose = require('mongoose');
 require('dotenv').config();
+//nous donne accès au chemins dans notre système de fichiers
 const path = require('path');
-
 
 //importation du fichier sauces.js permettant d'appeler le router
 const userRoutes = require('./routes/user');
@@ -20,6 +20,8 @@ mongoose.connect(process.env.SECRET_DB,
 
 app.use(express.json());
 
+
+//Middleware qui va répondre au requete via /images/ et servir le dossier images de façon statique, utilisation de la méthgode express.static
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 //Middleware pour modifier les authorisations provenant de deux ports différents,(CORS)
