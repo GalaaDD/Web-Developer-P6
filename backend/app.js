@@ -6,13 +6,15 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 //nous donne accès au chemins dans notre système de fichiers
 const path = require('path');
+//correctif de certaines failles de securitées de node.js
+const helmet = require('helmet');
 
 //importation du fichier sauces.js permettant d'appeler le router
 const userRoutes = require('./routes/user');
 const saucesRoutes = require('./routes/sauces');
 
 
-mongoose.connect(process.env.SECRET_DB,
+mongoose.connect(process.env.SECRET_MDB,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
@@ -20,6 +22,7 @@ mongoose.connect(process.env.SECRET_DB,
 
 app.use(express.json());
 
+//app.use(helmet()); PROBLEME CROSSORIGIN 
 
 //Middleware qui va répondre au requete via /images/ et servir le dossier images de façon statique, utilisation de la méthgode express.static
 app.use('/images', express.static(path.join(__dirname, 'images')));
