@@ -14,10 +14,10 @@ router.get('/', auth, multer, saucesCtrl.getAllSauces);
 //route GET utilisant : afin de mettre l'ID en paramètre, utilisation de findOne() dans le modèle pour trouver la Sauce unique ayant le meme _id que le paramètre de la requete, il est envoyé au au frontend dans une promise
 router.get('/:id', auth, saucesCtrl.getOneSauce); 
 //route PUT, utilisation de la méthode .updateOne pour mettre à jour l'objet, suivi de l'objet a modifier ainsi que l'objet modifié, qui correspond à l'id généré par mangoose
-router.put('/:id', auth, saucesCtrl.modifySauce);
+router.put('/:id', auth, multer, saucesCtrl.modifySauce);
 // middleware delete pour supprimer un objet avec l'utilisation deleteOne, un seul argument car c'est une suppression
 router.delete('/:id', auth, saucesCtrl.deleteSauce);
 // middleware pour recuperer les likes ou dislike d'un id
-router.post('/:id/like', auth, saucesCtrl.likeDislikeSauce);
+router.post('/:id/like', auth, saucesCtrl.likesFields);
 
 module.exports = router;
