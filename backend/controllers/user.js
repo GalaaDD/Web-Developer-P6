@@ -13,14 +13,14 @@ exports.signup = (req, res, next) => {
           .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
           .catch(error => res.status(400).json({  message: 'Utilisateur existant !', error }));
       })
-      .catch(error => res.status(500).json({  message: "erreur" , error }));
+      .catch(error => res.status(500).json({  message: "Une erreur serveur est survenue" , error }));
 };
 
 exports.login = (req, res, next) => {
   userModel.findOne({ email: req.body.email })
     .then(user => {
       if (!user) {
-        return res.status(401).json({ error: 'Utilisateur non trouvé !' });
+        return res.status(401).json({ error: 'Utilisateur inexhistant  !' });
       }
       bcrypt.compare(req.body.password, user.password)
         .then(valid => {
@@ -36,7 +36,7 @@ exports.login = (req, res, next) => {
             )
           });
         })
-        .catch(error => res.status(500).json({ error }));
+        .catch(error => res.status(500).json({ message: "Une erreur serveur est survenue", error }));
       })
-      .catch(error => res.status(500).json({ error }));
+      .catch(error => res.status(500).json({ message: "Une erreur serveur est survenue", error }));
 };

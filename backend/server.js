@@ -1,8 +1,5 @@
-//Appel du protocol http
 const http = require('http');
-//Appel de app.js
 const app = require('./app');
-
 
 const normalizePort = val => {
   const port = parseInt(val, 10);
@@ -15,6 +12,7 @@ const normalizePort = val => {
   }
   return false;
 };
+
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
@@ -37,10 +35,9 @@ const errorHandler = error => {
       throw error;
   }
 };
-//constante pour créer le server
+
 const server = http.createServer(app);
 
-//écoute du des ports serveur
 server.on('error', errorHandler);
 server.on('listening', () => {
   const address = server.address();

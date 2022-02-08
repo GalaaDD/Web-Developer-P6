@@ -56,7 +56,7 @@ exports.deleteSauce = (req, res, next) => {
           .catch(error => res.status(400).json({ error }));
       });
     })
-    .catch(error => res.status(500).json({ error }));
+    .catch(error => res.status(500).json({ message: "Une erreur serveur est survenue" , error }));
 };
 
 exports.getAllSauces =  (req, res, next) => {
