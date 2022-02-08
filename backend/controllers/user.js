@@ -2,8 +2,6 @@ const userModel = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-
-//middleware pour l'enregistrement de nouveaux utilisateurs, ou l'on va hasher le mot de passe et enregistrer le user dans la base de donnée
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
       .then(hash => {
@@ -18,7 +16,6 @@ exports.signup = (req, res, next) => {
       .catch(error => res.status(500).json({  message: "erreur" , error }));
 };
 
-//middleware pour connecter les utlisateurs existants, on va trouver le user dans la base de donnée auquel correspond l'addresse e-mail et comparer le mot de passe avec le hash
 exports.login = (req, res, next) => {
   userModel.findOne({ email: req.body.email })
     .then(user => {
@@ -28,7 +25,7 @@ exports.login = (req, res, next) => {
       bcrypt.compare(req.body.password, user.password)
         .then(valid => {
           if (!valid) {
-            return res.status(401).json({ error: 'Mot de passe  ou login incorrect !' });
+            return res.status(401).json({ error: 'Mot de passe ou login incorrect !' });
           }
           res.status(200).json({
             userId: user._id,

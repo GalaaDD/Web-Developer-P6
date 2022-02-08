@@ -1,19 +1,18 @@
-//Constantes pour appeler et pouvoir utiliser express
+//Imports
 const express = require('express');
 const app = express();
-//Constante pour appeler et pouvoir utiliser Mangoose
 const mongoose = require('mongoose');
 require('dotenv').config();
-//nous donne accès au chemins dans notre système de fichiers
 const path = require('path');
-//correctif de certaines failles de securitées de node.js
 const helmet = require('helmet');
+const Ddos = require('ddos');
+const ddos = new Ddos;
 
-//importation du fichier sauces.js permettant d'appeler le router
+//Routers call
 const userRoutes = require('./routes/user');
 const saucesRoutes = require('./routes/sauces');
 
-
+//Connection to mangoDB
 mongoose.connect(process.env.SECRET_MDB,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
@@ -21,13 +20,13 @@ mongoose.connect(process.env.SECRET_MDB,
   .catch(() => console.log('Connexion à MongoDB échouée !')); 
 
 app.use(express.json());
+app.use(ddos.express);
 
-//app.use(helmet()); PROBLEME CROSSORIGIN 
-
-//Middleware qui va répondre au requete via /images/ et servir le dossier images de façon statique, utilisation de la méthgode express.static
+//making images' folder static
 app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use(helmet());
 
-//Middleware pour modifier les authorisations provenant de deux ports différents,(CORS)
+//CORS authorisations
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
@@ -35,7 +34,7 @@ app.use((req, res, next) => {
     next();
   });
 
-// utilisation du router importé de sauces.js
+// use of the routers called earlier
 app.use('/api/sauces', saucesRoutes);
 app.use('/api/auth', userRoutes);
 
