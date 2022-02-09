@@ -74,9 +74,9 @@ exports.getAllSauces =  (req, res, next) => {
 };
 
 exports.likesFields = (req, res, next) => {
-  const likeField = req.body.like
-  const userId = req.body.userId
-  const sauceId = req.params.id
+  let likeField = req.body.like
+  let userId = req.body.userId
+  let sauceId = req.params.id
 
   if (likeField === 1) {
     sauceModel.updateOne({ _id: sauceId }, { $push: { usersLiked: userId }, $inc: { likes: +1 }})
