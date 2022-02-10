@@ -83,7 +83,7 @@ exports.likesFields = (req, res, next) => {
     .then(() => res.status(200).json({ message: `J'aime` }))
     .catch((error) => res.status(400).json({ error })) 
   } else if (likeField === -1) {
-      sauceModel.updateOne({ _id: sauceId }, { $inc: { dislikes: (likeField++) * -1 }, $push: { usersDisliked: userId } })
+      sauceModel.updateOne({ _id: sauceId }, { $push: { usersDisliked: userId }, $inc: { dislikes: +1 } })
       .then(() => res.status(200).json({ message: "Je n'aime pas !" }))
       .catch(error => res.status(400).json({ error }))
   } else {
