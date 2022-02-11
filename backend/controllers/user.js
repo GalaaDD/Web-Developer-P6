@@ -2,7 +2,6 @@ const userModel = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-
 //middleware to signUp, create a new user, hash the password and save it into the data base 
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)

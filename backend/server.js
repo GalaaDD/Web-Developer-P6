@@ -1,5 +1,7 @@
+//Protocol http
 const http = require('http');
 const app = require('./app');
+require('dotenv').config();
 
 const normalizePort = val => {
   const port = parseInt(val, 10);
@@ -12,10 +14,11 @@ const normalizePort = val => {
   }
   return false;
 };
-
-const port = normalizePort(process.env.PORT || '3000');
+//Port is in a variable
+const port = normalizePort(process.env.PORT || process.env.SECRET_PORT);
 app.set('port', port);
 
+//Handling error that could happen
 const errorHandler = error => {
   if (error.syscall !== 'listen') {
     throw error;

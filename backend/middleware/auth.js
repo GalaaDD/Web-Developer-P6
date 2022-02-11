@@ -1,6 +1,7 @@
+//Use of jsonwebtoken
 const jwt = require('jsonwebtoken');
 
-
+//exportation of auth middleware, verification of the token and of the user using the token
 module.exports = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(' ')[1];
