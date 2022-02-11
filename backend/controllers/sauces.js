@@ -2,6 +2,7 @@ const sauceModel = require("../models/sauce");
 //import fs package (fileSystem)
 const fs = require('fs');
 
+//Middleware to create a new sauce
 exports.createSauce =(req, res, next) => {
   const sauceObject = JSON.parse(req.body.sauce)
   delete sauceObject._id;
@@ -18,6 +19,7 @@ exports.createSauce =(req, res, next) => {
     .catch(error => res.status(400).json({ error }));
 };
 
+//Middleware to get one sauce in particular 
 exports.getOneSauce = (req, res, next) => {
   sauceModel.findOne({ 
     _id: req.params.id 
@@ -34,6 +36,7 @@ exports.getOneSauce = (req, res, next) => {
   );
 };
 
+//middleware to update sauce's informations
 exports.modifySauce = (req, res, next) => {
   const sauceObject = req.file ?
   {
@@ -46,6 +49,7 @@ exports.modifySauce = (req, res, next) => {
     .catch(error => res.status(400).json({ error }));
 };
 
+//Middleware to delete one sauce, use of fs(unlink) to delete the sauce  from the filesystem
 exports.deleteSauce = (req, res, next) => {
   sauceModel.findOne({ _id: req.params.id })
     .then(sauce => {
@@ -59,6 +63,7 @@ exports.deleteSauce = (req, res, next) => {
     .catch(error => res.status(500).json({ message: "Une erreur serveur est survenue" , error }));
 };
 
+// Middleware to get all sauces in an array we return to the frontend
 exports.getAllSauces =  (req, res, next) => {
   sauceModel.find().then(
     (sauces) => {
@@ -73,6 +78,7 @@ exports.getAllSauces =  (req, res, next) => {
   );
 };
 
+//Middleware to allow the user to like or not each sauces
 exports.likesFields = (req, res, next) => {
   let likeField = req.body.like
   let userId = req.body.userId

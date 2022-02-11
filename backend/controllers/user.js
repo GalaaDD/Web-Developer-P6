@@ -2,6 +2,8 @@ const userModel = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+
+//middleware to signUp, create a new user, hash the password and save it into the data base 
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
       .then(hash => {
@@ -16,6 +18,7 @@ exports.signup = (req, res, next) => {
       .catch(error => res.status(500).json({  message: "Une erreur serveur est survenue" , error }));
 };
 
+//Middleware to login to the user account, comparing hashes(passwords), and to create a token system with JsonWebToken
 exports.login = (req, res, next) => {
   userModel.findOne({ email: req.body.email })
     .then(user => {

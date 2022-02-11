@@ -9,7 +9,7 @@ const Ddos = require('ddos');
 const ddos = new Ddos;
 
 //Routers call
-const userRoutes = require('./routes/user');
+const userRoutes = require('./routes/User');
 const saucesRoutes = require('./routes/sauces');
 
 //Connection to mangoDB
